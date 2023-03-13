@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
         pokedexmodel.cpp
         filedownloader.h
         filedownloader.cpp
+        pokemonmovesetmodel.h
+        pokemonmovesetmodel.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

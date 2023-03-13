@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "./ui_widget.h"
 #include "pokedexmodel.h"
+#include "pokemonmovesetmodel.h"
 
 #include <QLineEdit>
 #include <QSortFilterProxyModel>
@@ -8,6 +9,8 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QMap>
+#include <iostream>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -46,9 +49,17 @@ Widget::Widget(QWidget *parent)
     pokedexView->setRootIndex(proxy->mapFromSource(pokedexModel->index(0,0)));
     connect(searchBar, SIGNAL(textChanged(QString)),proxy,SLOT(setFilterFixedString(QString)));
 
-    //On connecte le changement d'index sur la vue à un changement des informations sur le panel de droite
+    //On connecte le changement d'index sur la view de gauche au changement de modèle sur la view de droite
+    connect(pokedexView,&QListView::clicked,[pokedexView,movesetView](){
+        QString currentPokemon = pokedexView->currentIndex().data().toString();
+        PokemonMovesetModel* currentMovesetModel = new PokemonMovesetModel(currentPokemon);
+        movesetView->setModel(currentMovesetModel);
+    });
 
+    //On connecte également le changement d'index sur la view de gauche au changement d'icone à droite
+    connect(pokedexView,&QListView::clicked,[pokedexView,pokemon](){
 
+    });
 }
 
 Widget::~Widget()

@@ -9,8 +9,7 @@ class PokedexModel : public QStandardItemModel
     Q_OBJECT
 public:
     explicit PokedexModel(QObject *parent = nullptr);
-    QVariant data(const QModelIndex &index, int role) const;
-    bool setData(const QModelIndex &index, const QVariant &value,int role);
+
 
 signals:
     void dexProcessed();

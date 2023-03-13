@@ -41,7 +41,6 @@ PokedexModel::PokedexModel(QObject *parent)
             if(std::filesystem::exists("datas/"+trimmedPokemon.toStdString()+".png")) {
                 std::string name="datas/"+trimmedPokemon.toStdString()+".png";
                 QImage img;
-                std::cout<<name<<std::endl;
                 img.load(QString(name.c_str()));
                 currentItem->setData(QIcon(name.c_str()),Qt::DecorationRole);
             }
@@ -64,26 +63,4 @@ PokedexModel::PokedexModel(QObject *parent)
         }
     });
 }
-
-
-QVariant PokedexModel::data(const QModelIndex &index, int role) const
-{
-    if (!index.isValid())
-        return QVariant();
-
-
-    if(role == Qt::BackgroundRole)
-        return QColor("#ffffff");
-
-    return QStandardItemModel::data(index, role);
-}
-
-bool PokedexModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-    if(!index.isValid() || role != Qt::DecorationRole)
-        return false;
-    emit dataChanged(index, index);
-    return true;
-}
-
 

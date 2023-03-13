@@ -19,7 +19,6 @@ public:
 
 signals:
     void downloaded();
-
 private slots:
     void fileDownloaded(QNetworkReply* pReply);
 private :
